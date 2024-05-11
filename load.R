@@ -15,15 +15,17 @@ raw_df_long <- raw_df %>%
     bind_rows(
       raw_df %>%
         select(id, ends_with("_s1"), -id_s1) %>% # Remove each waves ID to use the general coalesced one
-        rename_with(~str_remove(., "_s1")),
+        rename_with(~str_remove(., "_s1")) %>%
+        mutate(time = "s1"),
       raw_df %>%
         select(id, ends_with("_s2"), -id_s2) %>%
         rename_with(~str_remove(., "_s2")) %>%
-        select(-college), # This wave had a college variable in it for some reason
+        select(-college) %>%
+        mutate(time = "s2"), # This wave had a college variable in it for some reason
       raw_df %>%
         select(id, ends_with("_s3"), -id_s3) %>%
-        rename_with(~str_remove(., "_s3"))
+        rename_with(~str_remove(., "_s3")) %>%
+        mutate(time = "s3")
     ),
     by="id" # Assuming each waves ID variable is complete and consistent
   )
-
