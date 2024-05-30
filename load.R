@@ -1,7 +1,9 @@
 library(tidyverse)
 library(rdrop2)
 
-raw_df <- drop_read_csv("/Winter Data/Longitudinal Colleges Data - Otago/Belonging_Dataset_Deidentified.csv") %>%
+rdrop2::drop_auth(new_user = TRUE)
+
+raw_df <- drop_read_csv("/Longitudinal Colleges Data - Otago/Belonging_Dataset_Deidentified.csv") %>%
   as_tibble() %>%
   rename_all(tolower)
 
@@ -29,3 +31,6 @@ raw_df_long <- raw_df %>%
     ),
     by="id" # Assuming each waves ID variable is complete and consistent
   )
+
+df_test <- raw_df_long %>%
+  select(starts_with("scs"), starts_with("bpns"))
