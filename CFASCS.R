@@ -10,8 +10,7 @@ Isolation =~ scs4 + scs13 + scs18 + scs25
 Mindfullness =~ scs9 + scs14 + scs17 + scs22
 Overidentified =~ scs2 + scs6 + scs20 + scs24
 
-scs =~ 1*SelfKindness + SelfJudgment + 
-CommonHumanity + Isolation + Mindfullness + Overidentified 
+scs =~ SelfKindness + SelfJudgment + CommonHumanity + Isolation + Mindfullness + Overidentified 
 '
 #Fitting the model using listwise deletion of missing data
 
