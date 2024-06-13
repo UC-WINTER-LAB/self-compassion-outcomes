@@ -35,4 +35,6 @@ raw_df_long <- raw_df %>%
   )
 
 df_test <- raw_df_long %>%
-  select(starts_with("scs"), starts_with("bpns"))
+  select(id, time, starts_with("scs"), starts_with("bpns")) %>%
+  # Removing rows with lots of missingness
+  filter(rowSums(is.na(.)) < 45)
