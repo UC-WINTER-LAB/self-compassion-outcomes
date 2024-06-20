@@ -52,15 +52,25 @@ scs =~ 1*SelfKindness + 1*SelfJudgment + 1*CommonHumanity + 1*Isolation + 1*Mind
 '
 #Fitting the model using listwise deletion of missing data
 
-fit.scs <- cfa(model, data=df_test, cluster="time", estimator="MLR")
+fit.scs <- cfa(model, data=df_test, cluster="id", estimator="ML")
 
 summary(fit.scs, fit=TRUE)
 
 bind_cols(
-  df_test %>% select(id, time, age, gender)
+  df_test %>% select(id, time, age, gender),
   predict(fit.scs)
   )
 
+
+df_test %>%
+  filter(time == "s1") %>%
+  select(contains("scs")) %>%
+  pivot_longer(cols = everything(),
+               names_to = "item",
+               values_to = "resp") %>%
+  ggplot(aes(x = resp)) + 
+  geom_bar() + 
+  facet_wrap(~item)
 ####################### Fitting Wellbeing
 
 ##### fitting wellbeing
@@ -75,7 +85,7 @@ mhcsf =~ emotional + social + psychological
 
 ###fitting the model
 
-fit.mhscf <- cfa(model, data=df_test, cluster="time")
+fit.mhscf <- cfa(model, data=df_test, cluster="id")
 
 ##sumarize the fit
 
