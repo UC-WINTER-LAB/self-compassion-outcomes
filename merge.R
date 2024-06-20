@@ -20,7 +20,16 @@ df_merged <- df_test %>%
       predict(fit.scs)
     ),
     by=c("id", "time")
-  )
+  )%>%
+  left_join(
+    bind_cols(
+      df_test %>%
+        select(id, time, contains("mhcsf")) %>%
+        na.omit() %>%
+        select(id, time),
+      predict(fit.scs)
+    ),
+    by=c("id", "time")
   
 #### copy from left join : contains ("Wellbeing shiz)
 

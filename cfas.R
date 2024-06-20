@@ -1,3 +1,4 @@
+install.packages("lavaan")
 library(lavaan)
 #################################### Fitting SDT factora
 
@@ -55,6 +56,11 @@ fit.scs <- cfa(model, data=df_test, cluster="time", estimator="MLR")
 
 summary(fit.scs, fit=TRUE)
 
+bind_cols(
+  df_test %>% select(id, time, age, gender)
+  predict(fit.scs)
+  )
+
 ####################### Fitting Wellbeing
 
 ##### fitting wellbeing
@@ -63,6 +69,7 @@ model <- '
 emotional =~ mhcsf1 + mhcsf2 + mhcsf3
 social =~ mhcsf4 + mhcsf5 + mhcsf6 + mhcsf7 + mhcsf8
 psychological =~ mhcsf9 + mhcsf10 + mhcsf11 + mhcsf12 + mhcsf13 + mhcsf14
+mhcsf =~ emotional + social + psychological
 '
 
 
