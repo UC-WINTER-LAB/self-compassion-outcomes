@@ -12,7 +12,7 @@ raw_df <- drop_read_csv("Winter Data/Longitudinal Colleges Data - Otago/Belongin
 # Convert the data from wide format to long format
 raw_df_long <- raw_df %>%
   mutate(id = coalesce(id, id_s1, id_s2, id_s3)) %>% # Take ID from a later wave if its not in base ID variable
-  select(id, -ends_with("_s1"), -ends_with("_s2"), -ends_with("_s3")) %>%
+  select(id, age, gender, -ends_with("_s1"), -ends_with("_s2"), -ends_with("_s3")) %>%
   # Join the base demographic data onto each waves variables
   left_join(
     # Stack each timepoint on top of each other and trim the suffix
