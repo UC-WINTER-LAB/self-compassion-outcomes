@@ -1,4 +1,3 @@
-install.packages("lavaan")
 library(lavaan)
 #################################### Fitting SDT factora
 
@@ -15,7 +14,7 @@ model <- '
 
 #Fitting the model using listwise deletion of missing data
 
-fit.sdt.six <- cfa(model, data=df_test, cluster="time")
+fit.sdt.six <- cfa(model, data=df_test, cluster="id")
 
 # Summarize the fit
 
@@ -31,7 +30,7 @@ model <- '
 '
 #Fitting the model using listwise deletion of missing data
 
-fit.sdt.three <- cfa(model, data=df_test, cluster="time")
+fit.sdt.three <- cfa(model, data=df_test, cluster="id")
 
 # Summarize the fit
 
@@ -85,8 +84,8 @@ mhcsf =~ emotional + social + psychological
 
 ###fitting the model
 
-fit.mhscf <- cfa(model, data=df_test, cluster="id")
+fit.mhcsf <- cfa(model, data=df_test, cluster="id")
 
 ##sumarize the fit
 
-summary(fit.mhscf, fit=TRUE)
+summary(fit.mhcsf, fit=TRUE)
